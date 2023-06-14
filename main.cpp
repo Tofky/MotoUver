@@ -1,4 +1,5 @@
 #include<iostream>
+#include <sstream>
 #include "ClaseViaje.h"
 void controlMemoria(int dia, ClaseViaje control[][10],ClaseViaje nuevoViaje){
 	for(int i = 0; i < 10; i++){
@@ -11,10 +12,35 @@ void controlMemoria(int dia, ClaseViaje control[][10],ClaseViaje nuevoViaje){
 int calculoPorKilometro (int kmRecorrido, int tarifaMinima){
 	int montoTotal = kmRecorrido * tarifaMinima;
 	return montoTotal;
-	
+}
+int obtenerHora(std::string tiempo){
+	std::stringstream ss(tiempo);
+	std::getline(ss, tiempo, ':');
+	int horas = std::stoi(tiempo);
+	return horas;
 }
 
-
+float montoAjuste(std::string horaInicio, std::string horaFinal){
+	float montoAjuste = 0.0;
+	int horaInicial = obtenerHora(horaInicio);
+	int horaFinalizacion = obtenerHora(horaFinal);
+	if (horaInicial >= 22 || horaFinalizacion >=	22 ){
+		montoAjuste = 0.25;
+	}
+	else if(horaInicial <= 6 || horaFinalizacion <= 6){
+		montoAjuste = 0.25;
+	}
+	return montoAjuste;
+}
+int adicionalFranjaHoraria(float montoAjuste,int calculoPorKilometro){
+	int reajuste = montoAjuste * calculoPorKilometro;
+	return reajuste;
+}
+int montoTotal(int montoSinAjuste, int reajuste){
+	int montoReajustado = montoSinAjuste + reajuste; 
+	return montoReajustado;
+}	
+	
 int main (int argc, char *argv[]) {
 	ClaseViaje control [31][10];
 	int opcion;
@@ -25,9 +51,9 @@ int main (int argc, char *argv[]) {
 	float consumoGasolina;
 	std::string horaInicio;
 	std::string horaFinal;
-	float tarifaMinima;
+	bool continuar = true;
 	
-	
+	do{
 	std::cout<<"				Menu Principal				"<<std::endl;
 	std::cout<<"(1)Ingresar nuevo viaje"<<std::endl;
 	std::cout<<"(2)Detalles viajes por dia"<<std::endl;
@@ -42,7 +68,7 @@ int main (int argc, char *argv[]) {
 	std::cin>>opcion;
 	system("CLS");
 	switch(opcion){
-	case 1: 
+	case 1: {
 		std::cout<<"<Menú Principal>	<1-Ingresar nuevo viaje>"<<std::endl;
 		std::cout<<std::endl;
 		std::cout<<"Ingrese los datos del nuevo viaje"<<std::endl;
@@ -51,24 +77,34 @@ int main (int argc, char *argv[]) {
 		std::cin>>dia;
 		std::cout<<"Kilómetros: ";
 		std::cin>>kmRecorrido;
+		std::cin.ignore();
+		std::cout<<"Lugar de origen: ";
+		std::getline(std::cin,origen);
+		std::cout<<"Lugar de destino: ";
+		std::getline(std::cin,destino);
 		std::cout<<"Litros Gasolina: ";
 		std::cin>>consumoGasolina;
-		std::cout<<"Lugar de origen: ";
-		std::cin>>origen;
-		std::cout<<"Lugar de destino: ";
-		std::cin>>destino;
 		std::cout<<"Hora de inicio (00:00 - 23:00)";
 		std::cin>>horaInicio;
 		std::cout<<"Hora de final (00:00 - 23:00)";
-		std::cin>>horaFinal;
+		std::cin>>horaFinal;  
 		ClaseViaje nuevoViaje(dia,kmRecorrido,consumoGasolina,origen,destino,horaInicio,horaFinal);
 		controlMemoria(dia,control,nuevoViaje);
 		std::cout<<std::endl;
 		std::cout<<"Monto del viaje:"<<std::endl;
-		tarifaMinima = nuevoViaje.getTarifaMinima();
-		std::cout<<kmRecorrido<<" kms x "<<tarifaMinima<<"-----------------------------$" <<calculoPorKilometro(kmRecorrido,tarifaMinima)<<std::endl;
-		
+		int tarifaMinima = nuevoViaje.getTarifaMinima();
+		int tarifaPorKilometro = calculoPorKilometro(kmRecorrido,tarifaMinima);
+		int reajusteCobro = adicionalFranjaHoraria(montoAjuste(horaInicio, horaFinal),tarifaPorKilometro);
+		int montoFinal = montoTotal(tarifaPorKilometro,reajusteCobro);
+		std::cout<<kmRecorrido<<" kms x "<<tarifaMinima<<"-----------------------------$ " <<tarifaPorKilometro<<std::endl;
+		std::cout<<"Adicional por hora (25%)------------------$ "<<reajusteCobro<<std::endl; 
+		std::cout<<"Total -----------------------------------$ "<<montoFinal<<std::endl; 
+		system("PAUSE");
+		system("CLS");
+		break;
 	}
+	}
+	}while(continuar == true);
 	return 0;
 }
 
