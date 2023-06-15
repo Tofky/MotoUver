@@ -10,7 +10,7 @@ ClaseViaje::ClaseViaje() {
 	costoConduccion = 0.0;
 	costoGasolina = 0.0;
 }
-ClaseViaje::ClaseViaje(int dia,float kmRecorrido,float consumoGasolina,std::string origen, std::string destino,std::string horaInicio, std::string horaFinal){
+ClaseViaje::ClaseViaje(int dia,int  kmRecorrido,int  consumoGasolina,std::string origen, std::string destino,std::string horaInicio, std::string horaFinal){
 	this->dia = dia;
 	this->kmRecorrido = kmRecorrido;
 	this->consumoGasolina = consumoGasolina;
@@ -26,19 +26,19 @@ ClaseViaje::~ClaseViaje(){
 int ClaseViaje::getDia (){
 	return dia;
 }
-float ClaseViaje::getCostoViaje(){
+int  ClaseViaje::getCostoViaje(){
 	return costoViaje;
 }
-float ClaseViaje::getTarifaMinima(){
+int  ClaseViaje::getTarifaMinima(){
 	return tarifaMinima;
 }
-float ClaseViaje::getCostoKmRecorrido(){
+int  ClaseViaje::getCostoKmRecorrido(){
 	return costoKmRecorrido;
 }	
-float ClaseViaje::getKmRecorrido(){
+int  ClaseViaje::getKmRecorrido(){
 	return kmRecorrido;
 }
-float ClaseViaje::getAjusteTarifario(){
+float  ClaseViaje::getAjusteTarifario(){
 	return ajusteTarifario;
 }
 std::string ClaseViaje::getOrigen(){
@@ -47,13 +47,13 @@ std::string ClaseViaje::getOrigen(){
 std::string ClaseViaje::getDestino(){
 	return destino;
 }
-float ClaseViaje::getCostoConduccion(){
+int  ClaseViaje::getCostoConduccion(){
 	return costoConduccion; 
 }
-float ClaseViaje::getCostoGasolina(){
+int  ClaseViaje::getCostoGasolina(){
 	return costoGasolina; 
 }
-float ClaseViaje::getConsumoGasolina(){
+int  ClaseViaje::getConsumoGasolina(){
 	return consumoGasolina;
 }
 std::string ClaseViaje::getHoraInicio(){
@@ -62,20 +62,26 @@ std::string ClaseViaje::getHoraInicio(){
 std::string ClaseViaje::getHoraFinal(){
 	return horaFinal;
 }
+int ClaseViaje::getTotalKilometro(){
+	return totalKilometro;
+}
+int ClaseViaje::getMontoExtra(){
+	return montoExtra;
+}
 //set
 void ClaseViaje::setDia (int dia){
 	this-> dia = dia;
 }
-void ClaseViaje::setCostoViaje(float costoViaje){
+void ClaseViaje::setCostoViaje(int costoViaje){
 	this->costoViaje = costoViaje;
 }
-void ClaseViaje::setCostoKmRecorrido(float costoKmRecorrido){
+void ClaseViaje::setCostoKmRecorrido(int  costoKmRecorrido){
 	this->costoKmRecorrido = costoKmRecorrido;
 }	
-void ClaseViaje::setAjusteTarifario(float ajusteTarifario){
+void ClaseViaje::setAjusteTarifario(float  ajusteTarifario){
 	this-> ajusteTarifario = ajusteTarifario;
 }
-void ClaseViaje::setKmRecorrido(float kmRecorrido){
+void ClaseViaje::setKmRecorrido(int  kmRecorrido){
 	this-> kmRecorrido = kmRecorrido;
 }
 void ClaseViaje::setOrigen(std::string origen){
@@ -84,13 +90,13 @@ void ClaseViaje::setOrigen(std::string origen){
 void ClaseViaje::setDestino(std::string destino){
 	this->destino = destino;
 }
-void ClaseViaje::setCostoConduccion(float costoConduccion){
+void ClaseViaje::setCostoConduccion(int  costoConduccion){
 	this->costoConduccion = costoConduccion; 
 }
-void ClaseViaje::setCostoGasolina(float costoGasolina){
+void ClaseViaje::setCostoGasolina(int  costoGasolina){
 	this->costoGasolina = costoGasolina; 
 }
-void ClaseViaje::setConsumoGasolina(float consumoGasolina){
+void ClaseViaje::setConsumoGasolina(int  consumoGasolina){
 	this->consumoGasolina = consumoGasolina;
 }
 void ClaseViaje::setHoraInicio(std::string horaInicio){
@@ -98,4 +104,10 @@ void ClaseViaje::setHoraInicio(std::string horaInicio){
 }
 void ClaseViaje::setHoraFinal(std::string horaFinal){
 	this->horaFinal = horaFinal;
+}
+void ClaseViaje::setTotalKilometro(int totalKilometro){
+	this->totalKilometro = totalKilometro;
+}
+void ClaseViaje::setMontoExtra(int montoExtra){
+	this->montoExtra = montoExtra;
 }

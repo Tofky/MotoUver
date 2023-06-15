@@ -10,8 +10,7 @@ void controlMemoria(int dia, ClaseViaje control[][10],ClaseViaje nuevoViaje){
 	}
 }
 int calculoPorKilometro (int kmRecorrido, int tarifaMinima){
-	int montoTotal = kmRecorrido * tarifaMinima;
-	return montoTotal;
+	return kmRecorrido * tarifaMinima;
 }
 int obtenerHora(std::string tiempo){
 	std::stringstream ss(tiempo);
@@ -20,8 +19,8 @@ int obtenerHora(std::string tiempo){
 	return horas;
 }
 
-float montoAjuste(std::string horaInicio, std::string horaFinal){
-	float montoAjuste = 0.0;
+float  montoAjuste(std::string horaInicio, std::string horaFinal){
+	float  montoAjuste = 0.0;
 	int horaInicial = obtenerHora(horaInicio);
 	int horaFinalizacion = obtenerHora(horaFinal);
 	if (horaInicial >= 22 || horaFinalizacion >=	22 ){
@@ -32,23 +31,24 @@ float montoAjuste(std::string horaInicio, std::string horaFinal){
 	}
 	return montoAjuste;
 }
-int adicionalFranjaHoraria(float montoAjuste,int calculoPorKilometro){
-	int reajuste = montoAjuste * calculoPorKilometro;
-	return reajuste;
+float adicionalFranjaHoraria(float  montoAjuste,int calculoPorKilometro){
+	return  montoAjuste * calculoPorKilometro;
 }
 int montoTotal(int montoSinAjuste, int reajuste){
-	int montoReajustado = montoSinAjuste + reajuste; 
-	return montoReajustado;
+	return montoSinAjuste + reajuste; 
 }	
+int tarifaPorConduccion(int kmRecorrido,int tarifaPorConduccion){
+	return kmRecorrido * tarifaPorConduccion;
+}
 	
 int main (int argc, char *argv[]) {
 	ClaseViaje control [31][10];
 	int opcion;
 	int dia;
-	float kmRecorrido;
+	int  kmRecorrido;
 	std::string origen;
 	std::string destino;
-	float consumoGasolina;
+	int  consumoGasolina;
 	std::string horaInicio;
 	std::string horaFinal;
 	bool continuar = true;
@@ -94,11 +94,21 @@ int main (int argc, char *argv[]) {
 		std::cout<<"Monto del viaje:"<<std::endl;
 		int tarifaMinima = nuevoViaje.getTarifaMinima();
 		int tarifaPorKilometro = calculoPorKilometro(kmRecorrido,tarifaMinima);
-		int reajusteCobro = adicionalFranjaHoraria(montoAjuste(horaInicio, horaFinal),tarifaPorKilometro);
+		float reajusteCobro = adicionalFranjaHoraria(montoAjuste(horaInicio, horaFinal),tarifaPorKilometro);
 		int montoFinal = montoTotal(tarifaPorKilometro,reajusteCobro);
+		nuevoViaje.setTotalKilometro(tarifaPorKilometro);
+		nuevoViaje.setMontoExtra(reajusteCobro);
+		nuevoViaje.setCostoViaje(montoFinal);
 		std::cout<<kmRecorrido<<" kms x "<<tarifaMinima<<"-----------------------------$ " <<tarifaPorKilometro<<std::endl;
 		std::cout<<"Adicional por hora (25%)------------------$ "<<reajusteCobro<<std::endl; 
 		std::cout<<"Total -----------------------------------$ "<<montoFinal<<std::endl; 
+		std::cout<<std::endl;
+		std::cout<<std::endl;
+		std::cout<<"Costo/gasto del viaje:"<<std::endl;
+		int tarifaTotalConduccion = tarifaPorConduccion(kmRecorrido,ClaseViaje::tarifaConduccion);
+		nuevoViaje.setCostoConduccion(tarifaTotalConduccion);
+		std::cout<<"Costo conducción " <<ClaseViaje::tarifaConduccion<<" -----------$ "<<nuevoViaje.getKmRecorrido()<<"kms x "<<nuevoViaje.getCostoConduccion()<<std::endl;
+		
 		system("PAUSE");
 		system("CLS");
 		break;

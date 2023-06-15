@@ -4,50 +4,59 @@
 
 class ClaseViaje {
 private:
-	float tarifaMinima = 500; 
+	
+	int  tarifaMinima = 500; 
 	int dia; 
-	float costoViaje; 
-	float costoKmRecorrido;
-	float consumoGasolina;
-	float kmRecorrido;
-	float ajusteTarifario;
+	int  costoViaje; 
+	int  costoKmRecorrido;
+	int  consumoGasolina;
+	int  kmRecorrido;
+	float  ajusteTarifario;
 	std::string origen; 
 	std::string destino;
-	float costoConduccion;
-	float costoGasolina;
+	int  costoConduccion;
+	int  costoGasolina;
 	std::string horaInicio;
 	std::string horaFinal;
+	int totalKilometro;
+	int montoExtra ;
+	
 public:
+	static const int tarifaConduccion = 150;
 	ClaseViaje();
 	~ClaseViaje();
-	ClaseViaje(int dia,float kmRecorrido,float consumoGasolina,std::string origen, std::string destino,std::string horaInicio, std::string horaFinal);
+	ClaseViaje(int dia,int  kmRecorrido,int  consumoGasolina,std::string origen, std::string destino,std::string horaInicio, std::string horaFinal);
 	//get
 	int getDia ();
-	float getCostoViaje(); 
-	float getTarifaMinima(); 
-	float getCostoKmRecorrido();	
-	float getAjusteTarifario();
-	float getKmRecorrido();
-	float getConsumoGasolina();
+	int  getCostoViaje(); 
+	int  getTarifaMinima(); 
+	int  getCostoKmRecorrido();	
+	float  getAjusteTarifario();
+	int  getKmRecorrido();
+	int  getConsumoGasolina();
 	std::string getOrigen(); 
 	std::string getDestino();
-	float getCostoConduccion();
-	float getCostoGasolina();
+	int  getCostoConduccion();
+	int  getCostoGasolina();
 	std::string getHoraInicio();
 	std::string getHoraFinal();
+	int getTotalKilometro();
+	int getMontoExtra();
 	//set 
 	void setDia(int dia);
-	void setCostoViaje(float costoViaje); 
-	void setCostoKmRecorrido(float costoKmRecorrido);	
-	void setAjusteTarifario(float ajusteTarifario);
-	void setKmRecorrido(float kmRecorrido);
-	void setConsumoGasolina(float consumoGasolina);
+	void setCostoViaje(int costoViaje); 
+	void setCostoKmRecorrido(int  costoKmRecorrido);	
+	void setAjusteTarifario(float  ajusteTarifario);
+	void setKmRecorrido(int  kmRecorrido);
+	void setConsumoGasolina(int  consumoGasolina);
 	void setOrigen(std::string origen); 
 	void setDestino(std::string destino);
-	void setCostoConduccion(float costoConduccion);
-	void setCostoGasolina(float costoGasolina);
+	void setCostoConduccion(int  costoConduccion);
+	void setCostoGasolina(int  costoGasolina);
 	void setHoraInicio(std::string horaInicio);
 	void setHoraFinal(std::string horaFinal);
+	void setTotalKilometro(int totalKilometro);
+	void setMontoExtra(int montoExtra);
 	//metodos
 	
 
