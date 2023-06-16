@@ -1,11 +1,10 @@
 #ifndef CLASEVIAJE_H
 #define CLASEVIAJE_H
 #include<iostream>
+#include<sstream>
 
 class ClaseViaje {
 private:
-	
-	int  tarifaMinima = 500; 
 	int dia; 
 	int  costoViaje; 
 	int  costoKmRecorrido;
@@ -15,21 +14,24 @@ private:
 	std::string origen; 
 	std::string destino;
 	int  costoConduccion;
-	int  costoGasolina;
+	float costoFinalGasolina;
 	std::string horaInicio;
 	std::string horaFinal;
 	int totalKilometro;
 	int montoExtra ;
+	int gastosTotales;
+	bool viajeCreado = false;
 	
 public:
 	static const int tarifaConduccion = 150;
+	static const int  tarifaMinima = 500; 
+	static const int  costoGasolinaKm = 170;
 	ClaseViaje();
 	~ClaseViaje();
 	ClaseViaje(int dia,int  kmRecorrido,int  consumoGasolina,std::string origen, std::string destino,std::string horaInicio, std::string horaFinal);
 	//get
 	int getDia ();
 	int  getCostoViaje(); 
-	int  getTarifaMinima(); 
 	int  getCostoKmRecorrido();	
 	float  getAjusteTarifario();
 	int  getKmRecorrido();
@@ -37,11 +39,12 @@ public:
 	std::string getOrigen(); 
 	std::string getDestino();
 	int  getCostoConduccion();
-	int  getCostoGasolina();
+	float  getcostoFinalGasolina();
 	std::string getHoraInicio();
 	std::string getHoraFinal();
 	int getTotalKilometro();
 	int getMontoExtra();
+	int getGastosTotales();
 	//set 
 	void setDia(int dia);
 	void setCostoViaje(int costoViaje); 
@@ -52,13 +55,14 @@ public:
 	void setOrigen(std::string origen); 
 	void setDestino(std::string destino);
 	void setCostoConduccion(int  costoConduccion);
-	void setCostoGasolina(int  costoGasolina);
+	void setcostoFinalGasolina(float costoFinalGasolina);
 	void setHoraInicio(std::string horaInicio);
 	void setHoraFinal(std::string horaFinal);
 	void setTotalKilometro(int totalKilometro);
 	void setMontoExtra(int montoExtra);
+	void setGastosTotales(int gastosTotales);
 	//metodos
-	
+	std::string toString(int numeroViaje);
 
 };
 

@@ -1,14 +1,13 @@
 #include "ClaseViaje.h"
-
+#include<sstream>
 ClaseViaje::ClaseViaje() {
 	dia = 0;
-	costoViaje = 0.0; 
-	costoKmRecorrido = 0.0;	
-	ajusteTarifario = 0.0;
-	origen = " "; 
+	kmRecorrido = 0;
+	consumoGasolina = 0;
+	origen = " ";
 	destino = " ";
-	costoConduccion = 0.0;
-	costoGasolina = 0.0;
+	horaInicio = " ";
+	horaFinal = " ";
 }
 ClaseViaje::ClaseViaje(int dia,int  kmRecorrido,int  consumoGasolina,std::string origen, std::string destino,std::string horaInicio, std::string horaFinal){
 	this->dia = dia;
@@ -29,9 +28,6 @@ int ClaseViaje::getDia (){
 int  ClaseViaje::getCostoViaje(){
 	return costoViaje;
 }
-int  ClaseViaje::getTarifaMinima(){
-	return tarifaMinima;
-}
 int  ClaseViaje::getCostoKmRecorrido(){
 	return costoKmRecorrido;
 }	
@@ -50,8 +46,8 @@ std::string ClaseViaje::getDestino(){
 int  ClaseViaje::getCostoConduccion(){
 	return costoConduccion; 
 }
-int  ClaseViaje::getCostoGasolina(){
-	return costoGasolina; 
+float  ClaseViaje::getcostoFinalGasolina(){
+	return costoFinalGasolina; 
 }
 int  ClaseViaje::getConsumoGasolina(){
 	return consumoGasolina;
@@ -67,6 +63,9 @@ int ClaseViaje::getTotalKilometro(){
 }
 int ClaseViaje::getMontoExtra(){
 	return montoExtra;
+}
+int ClaseViaje::getGastosTotales(){
+	return gastosTotales;
 }
 //set
 void ClaseViaje::setDia (int dia){
@@ -93,8 +92,8 @@ void ClaseViaje::setDestino(std::string destino){
 void ClaseViaje::setCostoConduccion(int  costoConduccion){
 	this->costoConduccion = costoConduccion; 
 }
-void ClaseViaje::setCostoGasolina(int  costoGasolina){
-	this->costoGasolina = costoGasolina; 
+void ClaseViaje::setcostoFinalGasolina(float costoFinalGasolina){
+	this->costoFinalGasolina = costoFinalGasolina; 
 }
 void ClaseViaje::setConsumoGasolina(int  consumoGasolina){
 	this->consumoGasolina = consumoGasolina;
@@ -110,4 +109,35 @@ void ClaseViaje::setTotalKilometro(int totalKilometro){
 }
 void ClaseViaje::setMontoExtra(int montoExtra){
 	this->montoExtra = montoExtra;
+}
+void ClaseViaje::setGastosTotales(int gastosTotales){
+	this->gastosTotales = gastosTotales;
+}
+//metodos 
+std::string ClaseViaje::toString(int numeroViaje){
+	std::stringstream ss;
+	ss << "----------------------------------------------------------------"<<std::endl;
+	ss << "(viaje #)"<< numeroViaje+1 <<std::endl;
+	ss << "----------------------------------------------------------------"<<std::endl;
+	ss <<"Kilometros: "<<kmRecorrido<<std::endl;
+	ss <<"Lugar de origen: "<<origen<<std::endl;
+	ss <<"Lugar de destino: "<<destino<<std::endl;
+	ss <<"Litros de gasolina: "<<consumoGasolina<<std::endl;
+	ss <<"Hora de inicio: "<<horaInicio<<std::endl;
+	ss <<"Hora de llegada: "<<horaFinal<<std::endl;
+	ss << std::endl;
+	ss << std::endl;
+	ss <<"Monto del viaje: " <<std::endl;
+	ss <<kmRecorrido<<" kms x " <<tarifaMinima<<"-----------------------------$ "<<totalKilometro<<std::endl;
+	ss <<"Adicionl por hora(25%)------------------$ "<<montoExtra<< std::endl;
+	ss <<"Total----------------------------------$ "<<costoViaje<<std::endl;
+	ss << std::endl;
+	ss << std::endl;
+	ss <<"Costo/gasto del viaje:"<< std::endl;
+	ss <<"Costo conducción ("<<kmRecorrido<<" kms x "<<tarifaConduccion<<")-------------$ "<<costoConduccion<< std::endl;
+	ss <<"Costo Gasolina--------------------------$ "<<costoFinalGasolina<<std::endl;
+	ss <<"Total costos--------------------------$ "<<gastosTotales<<std::endl;
+	
+	return ss.str();
+	
 }
